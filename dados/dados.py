@@ -1,0 +1,6 @@
+datas = []
+dinheiros = []
+dinheiro = []
+dividas = []
+divida = []
+sobra = []

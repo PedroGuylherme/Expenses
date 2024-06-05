@@ -1,0 +1,19 @@
+<form class="c-form" 
+    
+    action="{{ url_for('projeto.dinheiro_projeto') }}"
+    
+    method="POST"
+    
+    c-reload-container="true">
+
+    <label class="form-label">Digite a quantidade de dinheiro que você ganha mensalmente:</label>
+    
+    <div class="input-group mb-3">
+        <span class="input-group-text">R$</span>
+        <input type="number" class="form-control" placeholder="0,00" name="dinheiro">
+    </div>
+        
+    <button type="submit" class="btn btn-primary" >
+        Adicionar
+    </button>
+</form>

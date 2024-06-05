@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALCULADOR DE GASTOS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    
+  <h1 class="text-center titulo">CALCULADOR DE DIVIDAS</h1>
+        
+  <div c-container="{{ url_for('projeto.dinheiro_projeto') }}"> </div>
+
+</div>
+
+<div style="margin-top: 15px"></div> 
+
+<!--MODAL-->
+<div class="container">
+
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
+    Adicionar dividas
+  </button>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Adicione sua divida</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form
+          id="Form"
+          
+          class="c-form" 
+    
+          action="{{ url_for('projeto.add_divida_projeto') }}"
+          
+          method="POST"
+          
+          >
+            <div  c-container="{{ url_for('projeto.divida_projeto') }}">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+          <button form="Form" type="submit" class="btn btn-primary">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- FIM MODAL -->
+
+<!-- GRAFICO -->
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+  <canvas id="lineChart" width="1200" height="450"></canvas>
+    <script>
+
+      var ctx = document.getElementById("lineChart").getContext("2d");
+      var lineChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: {{ data_labels | safe }},
+            datasets: [
+              {
+                label: "Dinheiro que sobra",
+                data: {{ data_values | safe }},
+                fill: false,
+                borderColor: "rgb(0, 255, 255)",
+                backgroundColor: "rgba(0, 255, 255, 0.2)",
+                fontColor: "rgb(75, 192, 192)",
+                lineTension: 0
+           },
+           {
+                label: "Dinheiro",
+                data: {{ dinheiro_values | safe }},
+                fill: false,
+                borderColor: "rgb(0, 255, 0)",
+                backgroundColor: "rgba(0, 255, 0, 0.2)",
+                fontColor: "rgb(75, 192, 192)",
+                lineTension: 0
+           },
+           {
+                label: "Dividas",
+                data: {{ divida_values | safe }},
+                fill: false,
+                borderColor: "rgb(255,150,120)",
+                backgroundColor: "rgba(255,150,127, 0.2)",
+                fontColor: "rgb(255, 192, 192)",
+                lineTension: 0
+           }
+              
+        ]
+    },
+    
+    options:{
+      responsive: false,
+      
+    }
+  });
+        
+  </script>
+</div> 
+<!-- FIM DO GRAFICO -->
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="{{ url_for('static', filename='js/cru.js') }}"></script>
+   
+  </body>
+</html>

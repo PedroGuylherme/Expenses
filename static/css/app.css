@@ -1,0 +1,13 @@
+body{
+    background: rgb(170,180,255);
+    background: linear-gradient(90deg, rgba(170,180,255,1) 0%, rgba(107,70,255,1) 100%);
+}
+
+.input-group-text{
+    background: rgb(165,174,255);
+background: linear-gradient(90deg, rgba(165,174,255,1) 0%, rgba(175,155,255,1) 100%);
+}
+
+.texto{
+    font-size: 20px;
+}
