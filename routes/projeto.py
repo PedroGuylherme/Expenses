@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from dados.dados import datas, dinheiros, dinheiro, dividas, divida
 from datetime import datetime
+from database.models.projeto import Salario, Divida
 
 projeto_route = Blueprint('projeto', __name__)
 
@@ -14,7 +15,12 @@ def add_dinheiro_projeto():
 
     data = request.json
     print(data)
-    din = {
+
+    din = Salario.create(
+        salario = data['dinheiro']
+    )
+
+    '''din = {
         'dinheiro': f'dinheiro {len(dinheiros) + 1}',
         'R$': int(data['dinheiro'])
     }
@@ -24,8 +30,9 @@ def add_dinheiro_projeto():
     dinheiro.clear()
     if din['R$'] >= 1:  
         dinheiro.append(din['R$'])
-
-    print(dinheiro)
+    '''
+    print(din)
+    print(dinheiros,'SDADASDa')
     return render_template('dinheiro.html', din = din)
     
 @projeto_route.route('/<int>:dinheiro>/edit')
